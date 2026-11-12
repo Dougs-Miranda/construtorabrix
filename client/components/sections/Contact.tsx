@@ -3,47 +3,107 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, ArrowRight } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/SocialIcons";
+import {
+  COMPANY_ADDRESS,
+  CONTACT_EMAIL,
+  WHATSAPP_DISPLAY,
+  WHATSAPP_URL,
+} from "@/lib/constants";
+
+interface FormState {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+}
+
+const initialForm: FormState = {
+  name: "",
+  email: "",
+  phone: "",
+  message: "",
+};
+
+const contatoInfo = [
+  { icon: MapPin, title: "Endereço", text: COMPANY_ADDRESS },
+  { icon: Phone, title: "Telefone / WhatsApp", text: WHATSAPP_DISPLAY },
+  { icon: Mail, title: "E-mail", text: CONTACT_EMAIL },
+];
 
 export function Contact() {
+  const [form, setForm] = useState<FormState>(initialForm);
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validate = (): FormErrors => {
+    const nextErrors: FormErrors = {};
+    if (form.name.trim().length < 2) {
+      nextErrors.name = "Informe seu nome completo.";
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      nextErrors.email = "Informe um e-mail válido.";
+    }
+    if (form.phone.replace(/\D/g, "").length < 10) {
+      nextErrors.phone = "Informe um telefone ou WhatsApp com DDD.";
+    }
+    if (form.message.trim().length < 5) {
+      nextErrors.message = "Descreva brevemente seu interesse.";
+    }
+    return nextErrors;
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    setErrors({});
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSent(true);
-    }, 1500);
+      setForm(initialForm);
+    }, 800);
   };
 
   if (isSent) {
     return (
-      <section id="contato" className="py-24 bg-slate-50">
-        <div className="max-w-3xl mx-auto px-6 text-center">
+      <section id="contato" className="py-24 bg-neutral-light">
+        <div
+          className="max-w-3xl mx-auto px-6 text-center"
+          aria-live="polite"
+        >
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-500/10 border border-accent-500/20 text-accent-500 text-xs font-semibold uppercase tracking-wider mb-6"
-          >
-            Mensagem enviada
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-white rounded-3xl p-8 shadow-xl border border-border"
+            className="bg-white rounded-2xl p-8 sm:p-10 shadow-md border border-border"
           >
             <div className="w-16 h-16 rounded-full bg-accent-500/10 flex items-center justify-center text-accent-500 mx-auto mb-6">
-              <Send className="w-8 h-8" />
+              <Send className="w-8 h-8" aria-hidden="true" />
             </div>
-            <h2 className="text-2xl font-bold text-primary-900 mb-4">Mensagem enviada!</h2>
+            <h2 className="text-2xl font-bold text-primary-900 mb-3">
+              Mensagem enviada com sucesso!
+            </h2>
             <p className="text-slate-600 mb-8">
-              Obrigado pelo contato. Nossa equipe entrará em contato em breve.
+              Obrigado pelo contato. Nossa equipe comercial e técnica retornará
+              em breve.
             </p>
             <button
+              type="button"
               onClick={() => setIsSent(false)}
-              className="px-6 py-2 rounded-xl bg-primary-900 text-white text-sm font-semibold hover:bg-primary-800 transition-colors"
+              className="px-6 py-3 rounded-xl bg-primary-900 text-white text-sm font-semibold hover:bg-primary-800 transition-all active:scale-95"
             >
               Enviar outra mensagem
             </button>
@@ -53,98 +113,189 @@ export function Contact() {
     );
   }
 
-  const contato = [
-    { icon: MapPin, title: "Endereço", text: "Av. das Nações Unidas, 1234 - São Paulo, SP" },
-    { icon: Phone, title: "Telefone", text: "+55 (11) 9999-9999" },
-    { icon: Mail, title: "E-mail", text: "contato@construtorabrix.com.br" },
-  ];
-
   return (
-    <section id="contato" className="py-24 bg-slate-50">
+    <section id="contato" className="py-24 bg-neutral-light">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-900/10 border border-primary-900/20 text-primary-900 text-xs font-semibold uppercase tracking-wider mb-4">
-            Fale conosco
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-900/10 border border-primary-900/15 text-primary-900 text-xs font-semibold uppercase tracking-wider mb-4">
+            Fale Conosco
           </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-primary-900 mb-6 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-primary-900 mb-6 tracking-tight">
             Pronto para começar seu projeto?
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Preencha o formulário ou entre em contato diretamente pelo WhatsApp.
+            Preencha o formulário para receber uma apresentação ou fale
+            diretamente com nossa equipe pelo WhatsApp.
           </p>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-slate-700">Nome completo</label>
-                <input type="text" required className="w-full px-4 py-3 rounded-xl border border-border bg-white focus:ring-2 focus:ring-primary-900 focus:border-transparent outline-none transition-all" placeholder="Seu nome" />
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            onSubmit={handleSubmit}
+            noValidate
+            className="bg-white rounded-2xl p-6 sm:p-8 border border-border shadow-sm space-y-5"
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div className="space-y-1.5">
+                <label
+                  htmlFor="contact-name"
+                  className="block text-sm font-medium text-neutral-dark"
+                >
+                  Nome completo
+                </label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  required
+                  value={form.name}
+                  onChange={(e) =>
+                    setForm((prev) => ({ ...prev, name: e.target.value }))
+                  }
+                  className="w-full px-4 py-3 rounded-xl border border-border bg-white text-neutral-dark focus:ring-2 focus:ring-accent-500 focus:border-transparent outline-none transition-all"
+                  placeholder="Seu nome"
+                />
+                {errors.name && (
+                  <p className="text-xs text-red-600">{errors.name}</p>
+                )}
               </div>
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-slate-700">E-mail</label>
-                <input type="email" required className="w-full px-4 py-3 rounded-xl border border-border bg-white focus:ring-2 focus:ring-primary-900 focus:border-transparent outline-none transition-all" placeholder="seu@email.com" />
+
+              <div className="space-y-1.5">
+                <label
+                  htmlFor="contact-email"
+                  className="block text-sm font-medium text-neutral-dark"
+                >
+                  E-mail
+                </label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={(e) =>
+                    setForm((prev) => ({ ...prev, email: e.target.value }))
+                  }
+                  className="w-full px-4 py-3 rounded-xl border border-border bg-white text-neutral-dark focus:ring-2 focus:ring-accent-500 focus:border-transparent outline-none transition-all"
+                  placeholder="seu@email.com"
+                />
+                {errors.email && (
+                  <p className="text-xs text-red-600">{errors.email}</p>
+                )}
               </div>
             </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-slate-700">WhatsApp / Telefone</label>
-              <input type="tel" required className="w-full px-4 py-3 rounded-xl border border-border bg-white focus:ring-2 focus:ring-primary-900 focus:border-transparent outline-none transition-all" placeholder="+55 (11) 9999-9999" />
+
+            <div className="space-y-1.5">
+              <label
+                htmlFor="contact-phone"
+                className="block text-sm font-medium text-neutral-dark"
+              >
+                Telefone / WhatsApp
+              </label>
+              <input
+                id="contact-phone"
+                type="tel"
+                required
+                value={form.phone}
+                onChange={(e) =>
+                  setForm((prev) => ({ ...prev, phone: e.target.value }))
+                }
+                className="w-full px-4 py-3 rounded-xl border border-border bg-white text-neutral-dark focus:ring-2 focus:ring-accent-500 focus:border-transparent outline-none transition-all"
+                placeholder="(11) 99999-9999"
+              />
+              {errors.phone && (
+                <p className="text-xs text-red-600">{errors.phone}</p>
+              )}
             </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-slate-700">Mensagem / Interesse</label>
-              <textarea required rows={4} className="w-full px-4 py-3 rounded-xl border border-border bg-white focus:ring-2 focus:ring-primary-900 focus:border-transparent outline-none transition-all" placeholder="Conte sobre seu projeto ou empreendimento de interesse" />
+
+            <div className="space-y-1.5">
+              <label
+                htmlFor="contact-message"
+                className="block text-sm font-medium text-neutral-dark"
+              >
+                Mensagem / Interesse
+              </label>
+              <textarea
+                id="contact-message"
+                required
+                rows={4}
+                value={form.message}
+                onChange={(e) =>
+                  setForm((prev) => ({ ...prev, message: e.target.value }))
+                }
+                className="w-full px-4 py-3 rounded-xl border border-border bg-white text-neutral-dark focus:ring-2 focus:ring-accent-500 focus:border-transparent outline-none transition-all resize-none"
+                placeholder="Conte sobre seu projeto ou empreendimento de interesse"
+              />
+              {errors.message && (
+                <p className="text-xs text-red-600">{errors.message}</p>
+              )}
             </div>
-            <button type="submit" disabled={isSubmitting} className="w-full flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-primary-900 text-white font-bold text-lg hover:bg-primary-800 transition-all active:scale-95 shadow-lg disabled:opacity-70 disabled:cursor-not-allowed">
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-primary-900 text-white font-bold text-base hover:bg-primary-800 transition-all active:scale-95 shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
+            >
               {isSubmitting ? "Enviando..." : "Enviar mensagem"}
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-5 h-5" aria-hidden="true" />
             </button>
-          </form>
+          </motion.form>
 
-          <div className="space-y-8">
-            <div className="bg-white rounded-3xl p-8 shadow-xl border border-border">
-              <h3 className="text-xl font-bold text-primary-900 mb-6">Informações de contato</h3>
-              {contato.map((item) => (
-                <div key={item.title} className="flex items-start gap-4 mb-6">
-                  <div className="w-10 h-10 rounded-xl bg-primary-900/10 flex items-center justify-center text-primary-900 shrink-0">
-                    <item.icon className="w-5 h-5" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="space-y-6"
+          >
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-border">
+              <h3 className="text-xl font-bold text-primary-900 mb-6">
+                Informações de atendimento
+              </h3>
+              <div className="space-y-5">
+                {contatoInfo.map((item) => (
+                  <div key={item.title} className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-primary-900/10 flex items-center justify-center text-primary-900 shrink-0">
+                      <item.icon className="w-5 h-5" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-primary-900 text-sm">
+                        {item.title}
+                      </h4>
+                      <p className="text-slate-600 text-sm">{item.text}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-bold text-slate-900">{item.title}</h4>
-                    <p className="text-slate-600">{item.text}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
-            <div className="bg-primary-900 rounded-3xl p-8 text-white shadow-xl">
-              <h3 className="text-xl font-bold mb-4">Prefer WhatsApp?</h3>
-              <p className="text-slate-300 mb-6">
-                Fale diretamente com nossa equipe de atendimento.
+            <div className="bg-primary-900 rounded-2xl p-8 text-white shadow-md">
+              <h3 className="text-xl font-bold mb-2">Prefere WhatsApp?</h3>
+              <p className="text-slate-300 text-sm mb-6">
+                Converse agora com um especialista da Construtora BRIX para
+                tirar dúvidas sobre plantas, obras e investimentos.
               </p>
               <a
-                href="https://wa.me/5511999999999"
+                href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 w-full px-6 py-4 rounded-xl bg-accent-500 text-white font-bold text-lg hover:bg-blue-600 transition-all active:scale-95 shadow-lg shadow-blue-500/40"
+                className="flex items-center justify-center gap-3 w-full px-6 py-4 rounded-xl bg-accent-500 text-white font-bold text-base hover:bg-accent-600 transition-all active:scale-95 shadow-lg shadow-accent-500/30"
               >
-                <WhatsAppIcon className="w-5 h-5" /> Conversar pelo WhatsApp
+                <WhatsAppIcon className="w-5 h-5" />
+                Conversar pelo WhatsApp
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
-  );
-}
-
-function WhatsAppIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
-      viewBox="0 0 24 24"
-      className={className}
-    >
-      <path d="M12 0C5.374 0 0 5.373 0 12c0 2.738.926 5.242 2.44 7.177.603.766 1.345 1.45 2.256 1.955l.09.049c.155.084 8.324 4.16 8.324 4.16s6.28-2.693 8.574-5.594c1.138-1.438 1.435-2.346 1.457-2.397l.002-.007c.104-.252-.037-1.144-1.318-2.347-.29-.272-8.219-6.655-8.219-6.655l-.085-.047c-.98-.55-1.73-1.392-1.934-1.53-.216-.146-5.54-3.646-5.834-3.761-.29-.114-.613-.071-.896.178-.284.251-.382 1.047-.091 1.668l.003.007c.148.315 2.003 2.477 4.105 4.97 1.591 1.886 2.423 2.81 2.423 2.81s.444-.496.467-.517c.118-.112.145-.248.035-.495-.195-.439-1.667-3.296-1.947-3.772-.281-.476-.489-1.118-.415-1.403l.008-.029c.116-.437 1.348-1.269 2.684-.575.669.348 1.136.708 1.136.708s-.593 1.553-1.123 2.641c-.267.548-.74 1.054-1.147 1.377-.406.324-3.798 3.077-5.037 4.092l-.039.031c-.31.256-.593.429-.593.429s-.377-.326-.391-.336c-.027-.018-2.456-1.86-2.456-1.86s-1.218-1.644-1.263-2.52c-.044-.864-.073-1.488-.073-2.078 0-6.626 5.373-12 12-12" />
-    </svg>
   );
 }

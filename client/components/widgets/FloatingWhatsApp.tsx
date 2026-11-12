@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import { WhatsAppIcon } from "@/components/ui/SocialIcons";
-
-const WHATSAPP_URL = "https://wa.me/5511999999999";
+import { WHATSAPP_URL } from "@/lib/constants";
 
 export function FloatingWhatsApp() {
   return (
@@ -11,24 +10,19 @@ export function FloatingWhatsApp() {
       href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50"
-      aria-label="Fale pelo WhatsApp"
+      className="fixed bottom-6 right-6 z-50 group flex items-center gap-3"
+      aria-label="Fale conosco pelo WhatsApp"
     >
+      <span className="hidden sm:inline-block px-3 py-1.5 rounded-lg bg-primary-900 text-white text-xs font-semibold whitespace-nowrap shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+        Fale conosco
+      </span>
       <motion.div
-        whileHover={{ scale: 1.1 }}
+        whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
-        className="w-14 h-14 rounded-full bg-accent-500 text-white flex items-center justify-center shadow-xl shadow-blue-500/40 ring-4 ring-white ring-offset-2"
+        className="w-14 h-14 rounded-full bg-accent-500 hover:bg-accent-600 text-white flex items-center justify-center shadow-xl shadow-accent-500/35 ring-4 ring-white transition-colors"
       >
         <WhatsAppIcon className="w-7 h-7" />
       </motion.div>
-      <motion.span
-        initial={{ opacity: 0, x: 20, pointerEvents: "none" }}
-        animate={{ opacity: 1, x: 0, pointerEvents: "auto" }}
-        transition={{ delay: 0.5 }}
-        className="absolute bottom-[110px] right-0 px-3 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-medium whitespace-nowrap shadow-lg"
-      >
-        Fale conosco
-      </motion.span>
     </a>
   );
 }

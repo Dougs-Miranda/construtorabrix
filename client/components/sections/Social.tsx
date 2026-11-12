@@ -2,77 +2,143 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 import { InstagramIcon } from "@/components/ui/SocialIcons";
+import { BLUR_DATA_URL, INSTAGRAM_URL } from "@/lib/constants";
 
-const INSTAGRAM_URL = "https://instagram.com/construtorabrix";
+const feedImages = [
+  {
+    src: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=400&q=80",
+    alt: "Projeto arquitetônico e engenharia BRIX",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=400&q=80",
+    alt: "Acompanhamento estrutural de obra BRIX",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=400&q=80",
+    alt: "Acabamento de alto padrão em interiores",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=400&q=80",
+    alt: "Fachada residencial moderna BRIX",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=400&q=80",
+    alt: "Equipe técnica em canteiro de obras",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=400&q=80",
+    alt: "Entrega de empreendimento pronto para morar",
+  },
+];
 
 export function Social() {
   return (
-    <section id="social" className="py-24 bg-slate-50 relative overflow-hidden">
+    <section id="social" className="py-24 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-900/10 border border-primary-900/20 text-primary-900 text-xs font-semibold uppercase tracking-wider mb-4">
-              Prova Social
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-900/10 border border-primary-900/15 text-primary-900 text-xs font-semibold uppercase tracking-wider mb-4">
+              Diário de Obras & Comunidade
             </div>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-primary-900 mb-6 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-primary-900 mb-6 tracking-tight">
               Acompanhe o diário de obras
             </h2>
             <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-              Siga nosso Instagram oficial e veja de perto cada etapa dos nossos
-              empreendimentos: do lançamento à entrega das chaves.
+              Siga nosso Instagram oficial e veja de perto cada etapa dos
+              nossos empreendimentos: da fundação à entrega das chaves, com
+              transparência e rigor técnico.
             </p>
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-primary-900 flex items-center justify-center text-white shadow-lg">
+
+            <div className="flex items-center gap-3.5 mb-6">
+              <div className="w-12 h-12 rounded-xl bg-primary-900 flex items-center justify-center text-white shadow-md">
                 <InstagramIcon className="w-6 h-6" />
               </div>
               <div>
                 <h3 className="font-bold text-primary-900">@construtorabrix</h3>
-                <p className="text-sm text-slate-600">Siga no Instagram</p>
+                <p className="text-sm text-slate-500">
+                  Atualizações semanais direto dos canteiros
+                </p>
               </div>
             </div>
+
             <a
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary-900 text-white font-semibold text-sm hover:bg-primary-800 transition-colors active:scale-95 shadow-lg"
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-accent-500 text-white font-semibold text-sm hover:bg-accent-600 transition-all active:scale-95 shadow-md shadow-accent-500/25"
             >
-              <InstagramIcon className="w-4 h-4" /> Seguir no Instagram
+              <InstagramIcon className="w-4 h-4" />
+              Seguir @construtorabrix
+              <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
             </a>
-          </div>
+          </motion.div>
 
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary-900 to-primary-800 rounded-3xl p-[3px] mask mask-squish" />
-            <div className="relative bg-white rounded-3xl overflow-hidden shadow-2xl">
-              <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
-                <div className="flex gap-1.5">
-                  <div className="w-7 h-7 rounded-full bg-slate-200" />
-                  <div className="w-4 h-4 rounded-full bg-slate-200" />
-                  <div className="w-3 h-3 rounded-full bg-slate-200" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="relative"
+          >
+            <div className="bg-neutral-light rounded-2xl border border-border overflow-hidden shadow-lg">
+              <div className="flex items-center justify-between px-5 py-3.5 border-b border-border bg-white">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-full bg-primary-900 flex items-center justify-center text-white text-xs font-bold">
+                    B
+                  </div>
+                  <span className="text-sm font-bold text-primary-900">
+                    @construtorabrix
+                  </span>
                 </div>
-                <div className="flex-1 h-6 rounded bg-slate-200" />
+                <span className="text-xs font-medium text-accent-500">
+                  Instagram Oficial
+                </span>
               </div>
-              <div className="p-6">
-                <div className="aspect-video bg-slate-100 rounded-2xl overflow-hidden mb-4 relative">
+
+              <div className="p-5">
+                <div className="aspect-video bg-primary-900 rounded-xl overflow-hidden mb-3 relative">
                   <Image
-                    src="https://placehold.co/800x600/png?text=Construtora+BRIX+Instagram&font=inter&bg=1A1A1A&txtColor=007AFF"
-                    alt="Preview do Instagram"
+                    src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=900&q=80"
+                    alt="Bastidores de engenharia e obras da Construtora BRIX"
                     fill
-                    sizes="100vw"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
                     className="object-cover"
                   />
                 </div>
-                <div className="grid grid-cols-3 gap-2">
-                  {[1, 2, 3, 4, 5, 6].map((i) => (
-                    <div
-                      key={i}
-                      className="aspect-square bg-slate-100 rounded-lg"
-                    />
+
+                <div className="grid grid-cols-3 gap-2.5">
+                  {feedImages.map((item) => (
+                    <a
+                      key={item.src}
+                      href={INSTAGRAM_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative aspect-square rounded-lg overflow-hidden bg-slate-200 group"
+                    >
+                      <Image
+                        src={item.src}
+                        alt={item.alt}
+                        fill
+                        sizes="(max-width: 1024px) 33vw, 15vw"
+                        placeholder="blur"
+                        blurDataURL={BLUR_DATA_URL}
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </a>
                   ))}
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -6,12 +6,10 @@ import { cn } from "@/lib/utils";
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
   size?: "default" | "sm" | "lg" | "icon";
-  asChild?: boolean;
-  href?: string;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "default", size = "default", asChild = false, href, ...props }, ref) => {
+  ({ className, variant = "default", size = "default", ...props }, ref) => {
     const variants = {
       default: "bg-primary-900 text-white hover:bg-primary-800 shadow-sm",
       destructive: "bg-destructive text-white hover:bg-destructive/90 shadow-sm",

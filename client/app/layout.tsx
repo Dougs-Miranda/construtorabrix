@@ -10,21 +10,32 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Construtora BRIX | Engenharia de Precisão e Alto Padrão",
-  description: "Construtora BRIX - Solidez construtiva, sustentabilidade e acabamento de alto padrão. Conheça nossos empreendimentos em São Paulo.",
+  description:
+    "Construtora BRIX - Solidez construtiva, sustentabilidade e acabamento de alto padrão. Conheça nossos empreendimentos em São Paulo.",
   authors: [{ name: "Construtora BRIX" }],
   openGraph: {
     title: "Construtora BRIX | Engenharia de Precisão e Alto Padrão",
-    description: "Construtora BRIX - Solidez construtiva, sustentabilidade e acabamento de alto padrão.",
+    description:
+      "Construtora BRIX - Solidez construtiva, sustentabilidade e acabamento de alto padrão.",
     type: "website",
     locale: "pt_BR",
     siteName: "Construtora BRIX",
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans text-slate-900 antialiased">{children}</body>
+    <html
+      lang="pt-BR"
+      className={`${inter.variable} h-full scroll-smooth antialiased`}
+    >
+      <body className="min-h-full flex flex-col font-sans text-neutral-dark antialiased">
+        {children}
+      </body>
     </html>
   );
 }

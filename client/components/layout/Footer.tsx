@@ -1,64 +1,119 @@
-"use client";
-
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { InstagramIcon, WhatsAppIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
-
-const INSTAGRAM_URL = "https://instagram.com/construtorabrix";
-const WHATSAPP_URL = "https://wa.me/5511999999999";
-const LINKEDIN_URL = "https://linkedin.com/company/construtorabrix";
+import {
+  InstagramIcon,
+  WhatsAppIcon,
+  LinkedinIcon,
+} from "@/components/ui/SocialIcons";
+import {
+  CONTACT_EMAIL,
+  INSTAGRAM_URL,
+  LINKEDIN_URL,
+  WHATSAPP_DISPLAY,
+  WHATSAPP_URL,
+} from "@/lib/constants";
 
 export function Footer() {
   return (
-    <footer className="bg-primary-900 text-slate-300 border-t border-border/50">
+    <footer className="bg-primary-900 text-slate-300 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-12">
-        {/* Top section */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-12">
-          {/* Logo & Info */}
-          <div className="col-span-1 lg:col-span-1">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-xl tracking-tighter">B</span>
+          <div className="col-span-1">
+            <div className="flex items-center gap-2.5 mb-5">
+              <div className="w-10 h-10 rounded-xl bg-accent-500 flex items-center justify-center shadow-lg shadow-accent-500/20">
+                <span className="text-white font-bold text-xl tracking-tighter">
+                  B
+                </span>
               </div>
-              <span className="font-bold text-2xl text-white tracking-tight">BRIX</span>
+              <div className="flex flex-col leading-none">
+                <span className="font-extrabold text-xl text-white tracking-tight">
+                  BRIX
+                </span>
+                <span className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">
+                  Construtora
+                </span>
+              </div>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed max-w-xs">
-              Engenharia de precisão, solidez construtiva e compromisso com o futuro.
-              Construímos patrimônios com responsabilidade e excelência.
+              Engenharia de precisão, solidez construtiva e compromisso com o
+              futuro. Construímos patrimônios com responsabilidade e excelência.
             </p>
           </div>
 
-          {/* Links */}
-          <div className="col-span-3 lg:col-span-3 grid grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="col-span-1 lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div>
-              <h4 className="text-white font-semibold mb-6">Institucional</h4>
-              <ul className="space-y-3">
-                <li><Link href="#sobre" className="text-slate-400 hover:text-white transition-colors">Sobre a BRIX</Link></li>
-                <li><Link href="#empreendimentos" className="text-slate-400 hover:text-white transition-colors">Empreendimentos</Link></li>
-                <li><Link href="#sustentabilidade" className="text-slate-400 hover:text-white transition-colors">Sustentabilidade</Link></li>
-                <li><Link href="#contato" className="text-slate-400 hover:text-white transition-colors">Contato</Link></li>
+              <h4 className="text-white font-semibold mb-5">Institucional</h4>
+              <ul className="space-y-3 text-sm">
+                <li>
+                  <Link
+                    href="#inicio"
+                    className="text-slate-400 hover:text-white transition-colors"
+                  >
+                    Início
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#sobre"
+                    className="text-slate-400 hover:text-white transition-colors"
+                  >
+                    Sobre a BRIX
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#empreendimentos"
+                    className="text-slate-400 hover:text-white transition-colors"
+                  >
+                    Empreendimentos
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#sustentabilidade"
+                    className="text-slate-400 hover:text-white transition-colors"
+                  >
+                    Sustentabilidade
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#contato"
+                    className="text-slate-400 hover:text-white transition-colors"
+                  >
+                    Contato
+                  </Link>
+                </li>
               </ul>
             </div>
+
             <div>
-              <h4 className="text-white font-semibold mb-6">Atendimento</h4>
+              <h4 className="text-white font-semibold mb-5">Atendimento</h4>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
-                  <Phone className="w-4 h-4 text-slate-400 mt-0.5" />
-                  <span className="text-sm text-slate-400">+55 (11) 9999-9999</span>
+                  <Phone className="w-4 h-4 text-accent-500 mt-0.5 shrink-0" />
+                  <span className="text-sm text-slate-400">
+                    {WHATSAPP_DISPLAY}
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Mail className="w-4 h-4 text-slate-400 mt-0.5" />
-                  <span className="text-sm text-slate-400">contato@construtorabrix.com.br</span>
+                  <Mail className="w-4 h-4 text-accent-500 mt-0.5 shrink-0" />
+                  <span className="text-sm text-slate-400">
+                    {CONTACT_EMAIL}
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 text-slate-400 mt-0.5" />
-                  <span className="text-sm text-slate-400">São Paulo, SP - Brasil</span>
+                  <MapPin className="w-4 h-4 text-accent-500 mt-0.5 shrink-0" />
+                  <span className="text-sm text-slate-400">
+                    São Paulo, SP - Brasil
+                  </span>
                 </li>
               </ul>
             </div>
+
             <div>
-              <h4 className="text-white font-semibold mb-6">Redes Sociais</h4>
-              <ul className="space-y-3">
+              <h4 className="text-white font-semibold mb-5">Redes Sociais</h4>
+              <ul className="space-y-3 text-sm">
                 <li>
                   <a
                     href={INSTAGRAM_URL}
@@ -94,18 +149,18 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom section */}
-        <div className="border-t border-border/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-xs text-slate-500">
-            Construtora BRIX Engenharia e Incorporação LTDA. Todos os direitos reservados.
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-xs text-slate-400 text-center md:text-left">
+            © 2026 Construtora BRIX Engenharia e Incorporação LTDA.
+            CNPJ 00.000.000/0001-00. Todos os direitos reservados.
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-5">
             <a
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-white transition-colors"
-              aria-label="Instagram"
+              className="text-slate-400 hover:text-accent-500 transition-colors"
+              aria-label="Instagram da Construtora BRIX"
             >
               <InstagramIcon className="w-4 h-4" />
             </a>
@@ -113,8 +168,8 @@ export function Footer() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-white transition-colors"
-              aria-label="WhatsApp"
+              className="text-slate-400 hover:text-accent-500 transition-colors"
+              aria-label="WhatsApp da Construtora BRIX"
             >
               <WhatsAppIcon className="w-4 h-4" />
             </a>
@@ -122,8 +177,8 @@ export function Footer() {
               href={LINKEDIN_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-white transition-colors"
-              aria-label="LinkedIn"
+              className="text-slate-400 hover:text-accent-500 transition-colors"
+              aria-label="LinkedIn da Construtora BRIX"
             >
               <LinkedinIcon className="w-4 h-4" />
             </a>
