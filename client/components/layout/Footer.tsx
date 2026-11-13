@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import {
   InstagramIcon,
@@ -19,20 +20,14 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1">
-            <div className="flex items-center gap-2.5 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-accent-500 flex items-center justify-center shadow-lg shadow-accent-500/20">
-                <span className="text-white font-bold text-xl tracking-tighter">
-                  B
-                </span>
-              </div>
-              <div className="flex flex-col leading-none">
-                <span className="font-extrabold text-xl text-white tracking-tight">
-                  BRIX
-                </span>
-                <span className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">
-                  Construtora
-                </span>
-              </div>
+            <div className="mb-5 inline-flex rounded-md bg-white px-2 py-1">
+              <Image
+                src="/brix-logo.png"
+                alt="BRIX"
+                width={582}
+                height={146}
+                className="h-auto w-40"
+              />
             </div>
             <p className="text-sm text-slate-400 leading-relaxed max-w-xs">
               Engenharia de precisão, solidez construtiva e compromisso com o
@@ -58,6 +53,14 @@ export function Footer() {
                     className="text-slate-400 hover:text-white transition-colors"
                   >
                     Sobre a BRIX
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#empresas"
+                    className="text-slate-400 hover:text-white transition-colors"
+                  >
+                    Nossas Empresas
                   </Link>
                 </li>
                 <li>

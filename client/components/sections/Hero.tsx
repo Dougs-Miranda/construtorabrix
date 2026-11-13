@@ -2,172 +2,135 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Award, CheckCircle, Clock } from "lucide-react";
-import { WhatsAppIcon } from "@/components/ui/SocialIcons";
-import {
-  BLUR_DATA_URL,
-  WHATSAPP_DISPLAY,
-  WHATSAPP_URL,
-} from "@/lib/constants";
+import { ArrowDown, ArrowRight } from "lucide-react";
+import { BLUR_DATA_URL } from "@/lib/constants";
 
-interface MetricBadge {
-  value: string;
-  label: string;
-  icon: typeof Award;
-}
-
-const metrics: MetricBadge[] = [
-  { value: "150 mil+", label: "M² construídos", icon: Award },
-  { value: "100%", label: "Entregas no prazo", icon: Clock },
-  { value: "ISO 9001", label: "Qualidade certificada", icon: CheckCircle },
+const areasDeAtuacao = [
+  "Construção civil",
+  "Loteamentos",
+  "Energia sustentável",
+  "Agronegócio",
 ];
 
 export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative min-h-[calc(100vh-4.5rem)] flex items-center justify-center overflow-hidden bg-primary-900"
+      className="relative flex min-h-[calc(100svh-4.5rem)] items-center overflow-hidden bg-primary-900 text-white"
     >
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80"
-          alt="Empreendimento Construtora BRIX - Arquitetura contemporânea de alto padrão"
-          fill
-          sizes="100vw"
-          placeholder="blur"
-          blurDataURL={BLUR_DATA_URL}
-          className="object-cover"
-          priority
-        />
-      </div>
-
+      <Image
+        src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2200&q=85"
+        alt="Paisagem rural ilustrativa"
+        fill
+        sizes="100vw"
+        placeholder="blur"
+        blurDataURL={BLUR_DATA_URL}
+        className="object-cover"
+        priority
+      />
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-10 bg-gradient-to-b from-primary-900/90 via-primary-900/75 to-primary-900/95"
+        className="absolute inset-0 bg-gradient-to-r from-primary-900/95 via-primary-900/80 to-primary-900/45"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-t from-primary-900/65 via-transparent to-primary-900/20"
       />
 
-      <div className="relative z-20 max-w-7xl mx-auto px-6 py-16 lg:py-24 w-full flex flex-col gap-12">
-        <div className="flex flex-col lg:flex-row items-center gap-12">
-          <div className="lg:w-3/5">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent-500/15 border border-accent-500/30 text-orange-300 text-xs font-semibold uppercase tracking-wider mb-6 backdrop-blur-sm"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-500 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-500" />
-              </span>
-              Engenharia de Alto Padrão
-            </motion.div>
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-14 px-6 py-24 lg:grid-cols-[1.3fr_0.7fr] lg:py-32">
+        <div className="max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-7 inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-blue-200"
+          >
+            <span className="h-px w-9 bg-accent-500" aria-hidden="true" />
+            Um grupo, múltiplas frentes
+          </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] mb-6 tracking-tight"
-            >
-              Engenharia de precisão,{" "}
-              <span className="text-accent-500">patrimônio</span> para gerações.
-            </motion.h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mb-7 text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
+          >
+            Preparamos terreno para o{" "}
+            <span className="text-accent-500">amanhã</span>. Construímos valor
+            que permanece.
+          </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg md:text-xl text-slate-300 leading-relaxed mb-8 max-w-xl"
-            >
-              Solidez construtiva, sustentabilidade e acabamento de alto padrão.
-              Projetos que unem inovação arquitetônica, eficiência energética e
-              pontualidade rigorosa.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-3.5"
-            >
-              <a
-                href="#empreendimentos"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent-500 text-white font-bold text-base hover:bg-accent-600 transition-all active:scale-95 shadow-lg shadow-accent-500/30 w-full sm:w-auto"
-              >
-                Conheça os Empreendimentos
-                <ArrowRight className="w-4 h-4" />
-              </a>
-              <a
-                href="#sobre"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-base hover:bg-white/20 transition-all active:scale-95 w-full sm:w-auto"
-              >
-                Sobre Nós
-              </a>
-            </motion.div>
-          </div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-9 max-w-2xl text-lg leading-relaxed text-white/75 sm:text-xl"
+          >
+            Da construção civil à energia limpa e à inovação no campo, conectamos
+            diferentes frentes para contribuir com um futuro responsável e
+            duradouro.
+          </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="w-full lg:w-2/5"
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col gap-3 sm:flex-row"
           >
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 sm:p-8 shadow-2xl">
-              <div className="flex items-center gap-3.5 mb-5">
-                <div className="w-11 h-11 rounded-xl bg-accent-500 flex items-center justify-center shrink-0 shadow-md shadow-accent-500/30">
-                  <WhatsAppIcon className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h2 className="text-white font-bold text-lg leading-snug">
-                    Fale com nosso time
-                  </h2>
-                  <p className="text-slate-300 text-sm">
-                    Atendimento técnico e comercial
-                  </p>
-                </div>
-              </div>
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-xl bg-accent-500 text-white font-bold text-base hover:bg-accent-600 transition-all active:scale-95 shadow-lg shadow-accent-500/30"
-              >
-                <WhatsAppIcon className="w-4 h-4" />
-                Iniciar conversa no WhatsApp
-              </a>
-              <p className="text-slate-300 text-xs text-center mt-3">
-                Ou ligue: {WHATSAPP_DISPLAY}
-              </p>
-            </div>
+            <a
+              href="#empresas"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent-500 px-6 py-4 font-semibold text-white shadow-lg shadow-accent-500/25 transition-colors hover:bg-accent-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary-900"
+            >
+              Conheça nossas empresas
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+            <a
+              href="#sobre"
+              className="inline-flex items-center justify-center rounded-xl border border-white/35 px-6 py-4 font-semibold text-white transition-colors hover:border-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            >
+              Nossa história
+            </a>
           </motion.div>
         </div>
 
-        {/* Floating metric badges */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.45 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-white/10"
+        <motion.aside
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          aria-label="Áreas de atuação da BRIX"
+          className="justify-self-start rounded-2xl border border-white/20 bg-primary-900/45 p-6 shadow-2xl backdrop-blur-md sm:p-8 lg:justify-self-end"
         >
-          {metrics.map((metric) => (
-            <div
-              key={metric.label}
-              className="flex items-center gap-3.5 bg-white/10 backdrop-blur-md px-4 py-3.5 rounded-xl border border-white/15"
-            >
-              <div className="w-10 h-10 rounded-xl bg-accent-500/20 border border-accent-500/30 flex items-center justify-center shrink-0">
-                <metric.icon className="w-5 h-5 text-accent-500" />
-              </div>
-              <div className="min-w-0">
-                <div className="text-white font-bold text-lg leading-tight truncate">
-                  {metric.value}
-                </div>
-                <div className="text-slate-300 text-xs uppercase tracking-wider">
-                  {metric.label}
-                </div>
-              </div>
-            </div>
-          ))}
-        </motion.div>
+          <h2 className="mb-6 text-sm font-semibold uppercase tracking-[0.18em] text-white/65">
+            Áreas de atuação
+          </h2>
+          <ul className="space-y-4">
+            {areasDeAtuacao.map((area, index) => (
+              <li
+                key={area}
+                className="flex items-center gap-4 border-b border-white/15 pb-4 last:border-0 last:pb-0"
+              >
+                <span className="font-mono text-sm text-accent-500">
+                  0{index + 1}
+                </span>
+                <span className="text-lg font-medium text-white sm:text-xl">
+                  {area}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </motion.aside>
       </div>
+
+      <a
+        href="#sobre"
+        aria-label="Rolar para conhecer a BRIX"
+        className="absolute bottom-7 left-1/2 z-10 hidden -translate-x-1/2 text-white/65 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white md:block"
+      >
+        <ArrowDown className="h-5 w-5" aria-hidden="true" />
+      </a>
+      <span className="absolute bottom-4 right-6 z-10 text-[10px] tracking-wide text-white/50">
+        Imagem ilustrativa
+      </span>
     </section>
   );
 }

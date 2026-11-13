@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { FloatingWhatsApp } from "@/components/widgets/FloatingWhatsApp";
 import { Hero } from "@/components/sections/Hero";
 import { Sobre } from "@/components/sections/Sobre";
+import { Companies } from "@/components/sections/Companies";
 import { ProjectsGrid } from "@/components/sections/ProjectsGrid";
 import { Sustainability } from "@/components/sections/Sustainability";
 import { Social } from "@/components/sections/Social";
@@ -15,6 +16,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <Sobre />
+        <Companies />
         <ProjectsGrid />
         <Sustainability />
         <Social />

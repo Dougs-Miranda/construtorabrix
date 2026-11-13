@@ -79,7 +79,7 @@ export function Sustainability() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-accent-500/15 border border-accent-500/30 text-orange-300 text-xs font-semibold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-accent-500/15 border border-accent-500/30 text-blue-200 text-xs font-semibold uppercase tracking-wider mb-4">
             Sustentabilidade & Tecnologia
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">

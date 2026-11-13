@@ -27,7 +27,7 @@ interface ProjectCardProps {
 const statusStyles: Record<ProjectStatus, string> = {
   Lançamento: "bg-accent-500 text-white border-accent-600/30",
   "Em Obras": "bg-primary-800 text-white border-primary-900/30",
-  "Pronto para Morar": "bg-emerald-600 text-white border-emerald-700/30",
+  "Pronto para Morar": "bg-slate-700 text-white border-slate-800/30",
 };
 
 export function ProjectCard({ project, index }: ProjectCardProps) {
